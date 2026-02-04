@@ -8,6 +8,7 @@ app.use(cors())
 
 
 app.post("/api/notes",async (req , res)=>{
+    
     const {title , desc} = req.body
 
 try {
@@ -20,14 +21,14 @@ try {
         "message" : "success",
         noteData
        })
+       console.log("data sent to database", title , desc)
     
 } catch (error) {
     console.log("cannot create note" , error)
     
 }
 
-     
-
+    
       
 
 
@@ -48,6 +49,61 @@ try {
     console.log("cannot fetch notes from database")
     
 }
+})
+
+// app.patch("/api/notes/:id" , async(req , res)=>{
+
+//     const newUpdatingData = req.body
+//     const id = req.params
+    
+//     try {
+
+//         const response = await noteModel.findByIdAndUpdate(id , newUpdatingData);
+//         res.status(200).json({
+//             message : "Note updated succesfully " , 
+//             response
+//         })
+        
+        
+//     } catch (error) {
+//         res.send("cannot update data" , error)
+        
+//     }
+// })
+
+
+app.put("/api/notes/:id", async(req , res)=>{
+try {
+    const {title , desc } = req.body
+    const {id} = req.params
+    const response =await noteModel.replaceOne({_id : id} , {title , desc})
+
+    res.status(200).json({
+        message : "note update success",
+        response
+    })
+} catch (error) {
+
+    res.send("cannot update issue from db server", error);
+    
+}
+})
+
+app.delete("/api/notes/:id", async (req, res)=>{
+    try {
+        const {id} = req.params
+
+        const response = await noteModel.findByIdAndDelete(id)
+
+        res.status(200).json({
+            message: "delete success"
+        })
+
+    } catch (error) {
+        res.send(error)
+        console.log(error , "cannot delete from db")
+        
+    }
 })
 
 
