@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+
+
+@theme{
+    --font-ortho : ortho;
+    --color-bg : #1C352D;
+    --color-neutral : #A6B28B;
+    --color-whitey : #F9F6F3;
+}
+
+
+
+@font-face {
+    font-family: "ortho";
+    src: url("../public/fonts/Oughter.otf") format("opentype");
+}
+
+
+.custom-input{
+    outline: none;
+    border: none;
+    border-radius: 0.2rem;
+    background-color: white;
+   padding: 0.5rem 1rem;
+}
+
+
+
