@@ -4,20 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import {createBrowserRouter, RouterProvider} from "react-router"
 import Login from "./components/Login.jsx"
+import UserContextProvider from './context/UserContextProvider.jsx'
 
-const router = createBrowserRouter([
-  {
-    path : '/',
-    element : <App/>,
-    children :[
-      {
-        path : "/login",
-        element : <Login/>
-      }
-    ]
-  }
-])
+
 
 createRoot(document.getElementById('root')).render(
- <RouterProvider router = {router} />
+
+  <UserContextProvider >
+        <App/>
+  </UserContextProvider>
+
 )
