@@ -5,6 +5,7 @@ import axios from "axios"
 import Login from './components/Login'
 import CreateMeme from './components/CreateMeme'
 import userContext from './context/userContext'
+import MouseTracker from './utils/MouseTracker'
 const App = () => {
 
 
@@ -62,6 +63,8 @@ const App = () => {
         
       }
      </section>
+
+     <MouseTracker/>
 
     
 
