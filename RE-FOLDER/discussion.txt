@@ -1,0 +1,23 @@
+1. authentication  (routes , controllers) 
+  .creates a user ( register a user)
+  
+  { 
+    userName : 
+    email : 
+    password : 
+    gender: 
+    phoneNumber :
+    uid :
+    gameName : 
+
+  }
+
+
+  .login the user 
+
+2. posts
+  .create a post
+
+
+  
+  

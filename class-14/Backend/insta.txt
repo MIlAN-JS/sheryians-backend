@@ -1,0 +1,69 @@
+insta basic clone 
+
+Authentication
+
+1. register
+2. login
+3.logout
+4. otp based login (if required)
+
+
+1. User ( user data )
+ can follow
+ can see the following
+
+2. post
+  create 
+  can see the post 
+  like the post 
+  save the post
+
+
+
+rule#1 : feature deciding ---> backend creation 
+
+
+
+
+user data = {
+  user_name 
+  user_email, 
+  user_password, 
+  user_bio 
+  user_imgae
+  followers : []
+  following : []
+}
+
+
+post : {
+  caption : "",
+  img_Link : "",  // file handelling --
+  userId :   , // 
+}
+
+
+
+
+
+
+
+
+
+followers : 
+following :   --->   we cannot store them in users schema like users : {
+                                                                    following : 
+                                                                    type : objectId
+                                                                    ref : user
+
+                                                                            } because if there are millions of followers then it requires high amount of storage and network
+
+
+so we use
+
+edge collection (a collection where realtion between 2 documents are stored like , realtion between post and like , post and comment , follower and following etc )
+
+
+
+how do we use it ( we create a new collection for this )
+ 
