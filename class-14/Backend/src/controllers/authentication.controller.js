@@ -147,7 +147,7 @@ const loginController = async (req , res)=>{
                 {email }, 
                 {userName}
             ]
-        })
+        }).select("+password")
         console.log(user)
 
          if(!user){

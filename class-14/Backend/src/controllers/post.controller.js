@@ -1,6 +1,7 @@
 
 const ImageKit = require("imagekit")
 const postModel = require("../models/post.model")
+const likeModel = require("../models/like.model")
 const jwt = require("jsonwebtoken")
 
 
@@ -103,13 +104,68 @@ console.log(req.body)
 const getAllPostsController = async(req , res)=>{
 
 
+
     try {
 
-        const posts = await postModel.find()
+        const user = req.user
+
+        
+        //      const posts = await Promise.all((await postModel.find({}).populate("userId").lean())
+        // .map(async (post) => {
+        //     const isLiked = await likeModel.findOne({
+        //         user: user.id,
+        //         post: post._id
+        //     })
+
+        //     post.isLiked = Boolean(isLiked)
+
+        //     return post
+        // }))
+
+        // get user data 
+        const posts = await postModel.find({}).populate("userId").lean();
+
+        const updatedPosts = await Promise.all(  posts.map( async(post)=>{
+            const isLiked = await likeModel.findOne({
+                post :   post._id,
+                user:user.id
+
+            })
+            post.isLiked = Boolean(isLiked)
+            return post ;
+             
+        })) 
+
+     
+
+
+
+
+
+
+
+            console.log(posts)
+
+
+             
+                
+            // const updatedPost = await Promise.all(posts.map(async(post)=>{
+               
+
+            //     const isLiked = await likeModel.findOne({
+            //         post : post._id, 
+            //         user : user.id
+            //     })
+
+            //     console.log(isLiked)
+            //     post.isLiked  = Boolean(isLiked)
+
+            //     return post
+            // }))
 
         res.status(200).json({
             message : "post found",
-            posts : posts, 
+            posts : updatedPosts, 
             success : true
         })
 
@@ -125,6 +181,12 @@ const getAllPostsController = async(req , res)=>{
     } catch (error) {
 
         console.log("cannot get posts " , error)
+        res.send(
+            {
+                "message" : "error",
+                error
+            }
+        )
         
     }
 

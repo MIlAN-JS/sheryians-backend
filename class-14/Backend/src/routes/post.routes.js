@@ -8,9 +8,9 @@ const { checkToken } = require("../middlewares/authMiddlewares")
 
 
 postRouter.post("/create",checkToken , createPostController )
-postRouter.get("/all-post" ,checkToken , getAllPostsController )
+postRouter.get("/get-feed" ,checkToken , getAllPostsController )
 postRouter.get("/personal-posts",checkToken , getPersonalPost)
-
+// /api/posts/
 
 
 

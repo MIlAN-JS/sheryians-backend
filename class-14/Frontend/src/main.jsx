@@ -8,6 +8,8 @@ import Register from './Features/authentication/pages/Register.jsx'
 import Layout from './Layout.jsx'
 import AuthProvider from './Features/authentication/context/AuthContext.jsx'
 
+import PostProviderContext from "./Features/posts/context/postContext.jsx"
+import FeedPage from './Features/posts/pages/FeedPage.jsx'
 
 
 const router = createBrowserRouter([
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
 
         {
           path : "",
-          element : <App/>
+          element : <FeedPage/>
         }, 
         {
           path: "/login",
@@ -42,8 +44,11 @@ const router = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
+  <PostProviderContext>
   <AuthProvider>
       <RouterProvider router={router} /> 
-  </AuthProvider  >,
+  </AuthProvider  >
+  </PostProviderContext>
+  ,
   
 )

@@ -9,6 +9,7 @@ const authRouter = require("./routes/authentication.routes")
 const postRouter = require("./routes/post.routes")
 const multer = require("multer");
 const followerRouter = require("./routes/followers.routes");
+const likeRouter = require("./routes/likes.routes");
 
 
 const upload = multer({storage : multer.memoryStorage()})
@@ -34,6 +35,7 @@ app.use(cors({
 app.use("/api/authentication", authRouter)
 app.use("/api/posts", upload.single("document") , postRouter)
 app.use("/api/", followerRouter)
+app.use("/api/posts/", likeRouter)
 
 
 
