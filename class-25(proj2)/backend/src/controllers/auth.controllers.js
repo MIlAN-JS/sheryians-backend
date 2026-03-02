@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+const blacklistModel =  require("../models/blackList.model")
 
 
 const registerController = async(req , res)=>{
@@ -138,8 +139,58 @@ const loginController = async(req , res)=>{
     }
 }
 
+const getUserController = async(req , res)=>{
+    try {
+        //check the user token
+        const  user = req.user.id;
+        
+
+        // get data from db 
+        const userData = await userModel.findById(user)
+ 
+        console.log(userData)
+
+        res.status(201).json({
+            message : "user found ", 
+            user : {
+               email : userData.email, 
+               userName : userData.userName
+            }
+
+        })
+        
+    } catch (error) {
+        console.log("cannot get user", error)
+        res.send("errorfound" , "400")
+    }
+}
+
+const logoutUserController = async(req ,res)=>{
+    try {
+
+        const token = req.cookies.token
+        //deleting token of the user
+        res.clearCookie("token")
+        const blacklistedToken = await blacklistModel.create({token})
+
+        res.status(200).json({
+            message : "logout success"
+        })
+        
+    } catch (error) {
+        console.log("cannot logout user")
+        res.status(400).json({
+            message : "cannot logout user"
+        })
+        
+    }
+
+}
+
 
 module.exports = {
     registerController , 
-    loginController
+    loginController ,
+    getUserController,
+    logoutUserController
 }
