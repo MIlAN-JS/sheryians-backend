@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt")
 const blacklistModel =  require("../models/blackList.model")
 const redis = require("../config/cache")
 
+
 const registerController = async(req , res)=>{
     try {
 console.log(req.body)
@@ -141,6 +142,7 @@ const loginController = async(req , res)=>{
 
 const getUserController = async(req , res)=>{
     try {
+        console.log(req.user)
         //check the user token
         const  user = req.user.id;
         
