@@ -3,6 +3,7 @@ import RegisterPage from "./Features/auth/pages/RegisterPage.jsx"
 import LoginPage from "./Features/auth/pages/LoginPage.jsx"
 import App from "./App.jsx"
 import Protected from "./Features/auth/components/Protected.jsx"
+import Public from "./Features/auth/components/Public.jsx"
 
 const router = createBrowserRouter([
     {
@@ -11,11 +12,11 @@ const router = createBrowserRouter([
     },
     {
         path : "/login",
-        element:<LoginPage/>
+        element: <Public><LoginPage/></Public>
     },
     {
         path : "/register", 
-        element : <RegisterPage/>
+        element :<Public><RegisterPage/></Public> 
     }
 
 ])
