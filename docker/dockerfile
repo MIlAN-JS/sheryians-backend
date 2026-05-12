@@ -1,0 +1,22 @@
+# step 1 : get nodejs and linux os
+
+FROM node:20-alpine
+
+# step 2 : Get node modules
+ 
+COPY ./package.json .
+COPY ./package-lock.json .
+
+# step 3 : install node modules 
+RUN npm install
+
+
+# step 4 : Get all files
+
+COPY . . 
+
+
+#step 6 : run the server or the container 
+
+CMD ["npm" ,  "dev"]
+

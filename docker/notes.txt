@@ -1,0 +1,2 @@
+step 1 : create image in dockerfile
+step 2 : execute that image which will become container
